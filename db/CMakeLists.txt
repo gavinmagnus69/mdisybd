@@ -16,8 +16,8 @@ find_package(jwt-cpp CONFIG REQUIRED)
 
 
 add_library(libs STATIC
- src/config/Config.cpp
- src/database/Database.cpp
+ src/Config/Config.cpp
+ src/Database/Database.cpp
 )
 
 target_include_directories(libs PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)

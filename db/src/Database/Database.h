@@ -2,7 +2,7 @@
 #define DATABASE_H
 
 #include "IDatabase.h"
-#include "config/IConfig.h"
+#include "Config/IConfig.h"
 #include <memory>
 #include <pqxx/pqxx>
 #include "spdlog/spdlog.h"

@@ -170,3 +170,90 @@ SELECT name_enrollee,
  name_subject,
   MAX(result) OVER (PARTITION BY enrollee_id) AS best_enrollee_result
 FROM enrollee_subject es JOIN enrollee e ON es.enrollee_id = e.id JOIN subject s on es.subject_id = s.id;
+
+
+-- logging trigger
+CREATE TABLE logs (
+    id SERIAL PRIMARY KEY,
+    name_table VARCHAR(50),
+    action VARCHAR(10),
+    data JSONB,
+    updated_at TIMESTAMP DEFAULT NOW()
+);
+
+
+CREATE OR REPLACE FUNCTION logging_function()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO logs (name_table, action, data)
+    VALUES (TG_TABLE_NAME, TG_OP, row_to_json(NEW));
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER users_logging
+AFTER INSERT OR UPDATE OR DELETE ON "User"
+FOR EACH ROW
+EXECUTE PROCEDURE logging_function();
+-- 
+
+
+--Token generation after User creation
+CREATE OR REPLACE FUNCTION create_user_token()
+RETURNS TRIGGER AS $$
+BEGIN
+    INSERT INTO "Token"(user_id, token, expires_at) VALUES
+	(NEW.id, md5(NEW.username), CURRENT_TIMESTAMP + INTERVAL '1 day');
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE TRIGGER create_token_on_insert
+AFTER INSERT ON "User"
+FOR EACH ROW
+EXECUTE FUNCTION create_user_token();
+
+-- User creation function
+CREATE OR REPLACE PROCEDURE add_user(
+    IN p_username VARCHAR(255),
+    IN p_email VARCHAR(255),
+	IN hash VARCHAR(255)
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    INSERT INTO "User" (username, email, password_hash, role, created_at, updated_at) VALUES
+    (p_username, p_email, hash, 0, DEFAULT, DEFAULT);
+    RAISE NOTICE 'User % with email % has been added successfully.', p_username, p_email;
+EXCEPTION
+    WHEN unique_violation THEN
+        RAISE NOTICE 'A user with the username % or email % already exists.', p_username, p_email;
+    WHEN OTHERS THEN
+        RAISE NOTICE 'An unexpected error occurred: %', SQLERRM;
+END;
+$$;
+
+CALL add_user('romabro1', 'romab2ro@bro.com', 'asfasfasfasf');
+
+-- Changer role
+
+CREATE OR REPLACE PROCEDURE change_user_role(
+    IN p_username VARCHAR(255),
+    IN p_role SMALLINT
+)
+LANGUAGE plpgsql
+AS $$
+BEGIN
+    UPDATE "User"
+    SET "User".role = p_role
+    WHERE "User".username = p_username;
+    RAISE NOTICE 'User % role has been updated.', p_username;
+EXCEPTION
+    WHEN unique_violation THEN
+        RAISE NOTICE 'A user with the username % do not exists', p_username;
+    WHEN OTHERS THEN
+        RAISE NOTICE 'An unexpected error occurred: %', SQLERRM;
+END;
+$$;
