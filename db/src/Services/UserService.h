@@ -5,13 +5,14 @@
 #include "Database/IDatabase.h"
 #include <memory>
 #include "Service.h"
+#include "Entities/User.h"
+
 
 class UserService : public Service {
 private:
     std::string tableName = "User";
 public:
-    void addUser(const std::string& username, const std::string& email, const std::string& hash, uint16_t role);
-    
+    void addUser(const User&);
 };
 
 #endif
