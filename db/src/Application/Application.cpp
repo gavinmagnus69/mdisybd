@@ -8,4 +8,5 @@ Application::Application(std::shared_ptr<IDatabase> db)
 
 void Application::Run() {
     std::cout << "Application running\n";
+    this->ui.Run();
 }

@@ -37,6 +37,7 @@ add_library(libs STATIC
  src/Controllers/AuthController.cpp
  src/Router/Router.cpp
  src/Middleware/Middleware.cpp
+ src/ConsoleInterface/ConsoleUI.cpp
 )
 
 target_include_directories(libs PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)

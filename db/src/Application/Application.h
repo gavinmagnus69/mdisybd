@@ -5,11 +5,13 @@
 #include "Database/IDatabase.h"
 #include "Config/IConfig.h"
 #include <memory>
+#include "ConsoleInterface/ConsoleUI.h"
 
 
 class Application {
 private:
     std::shared_ptr<IDatabase> db;
+    ConsoleUI ui;
 public:
     Application(std::shared_ptr<IDatabase>);
 public:

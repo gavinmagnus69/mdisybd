@@ -2,6 +2,10 @@
 #define MIDDLEWARE_H
 
 
-class Middleware {};
+class Middleware {
+public:
+
+    bool checkAccess();
+};
 
 #endif 

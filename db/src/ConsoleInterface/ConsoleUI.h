@@ -4,7 +4,7 @@
 
 class ConsoleUI {
 private:
-    
+    void HelloMsg();
 public:
     void Run();
 };
