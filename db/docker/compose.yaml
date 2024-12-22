@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  postgres:
+    image: postgres:latest
+    ports:
+      - "22813:5432"
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=your_password
+    networks:
+      - pgadmin-network
+  pgadmin:
+    image: dpage/pgadmin4
+    ports:
+      - "51337:80"
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=roman@roman.com
+      - PGADMIN_DEFAULT_PASSWORD=Amogus228
+    depends_on:
+      - postgres
+    networks:
+      - pgadmin-network
+networks:
+  pgadmin-network:

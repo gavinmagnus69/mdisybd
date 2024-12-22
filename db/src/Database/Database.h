@@ -22,7 +22,7 @@ public:
     bool remove(const std::string& table, const std::map<std::string, std::string>& conditions) override;
     std::optional<std::vector<std::map<std::string, std::string>>> get(const std::string& table, const std::map<std::string, std::string>& conditions) override;
     bool update(const std::string& table, const std::map<std::string, std::string>& values, const std::map<std::string, std::string>& conditions) override;
-    void raw_sql(const std::string& sql) override;    
+    bool raw_sql(const std::string& sql) override;    
 
 };
 #endif

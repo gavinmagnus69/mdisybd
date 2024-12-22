@@ -95,6 +95,9 @@ bool Database::insert(const std::string& table, const std::map<std::string, std:
     spdlog::info("{}", sql);
     pqxx::nontransaction n(*connection.get());
     pqxx::result R(n.exec(sql));
+    if(!R.affected_rows()) {
+        return false;
+    }
     return true;
 }
 
@@ -114,6 +117,9 @@ bool Database::remove(const std::string& table, const std::map<std::string, std:
     std::string sql = std::format("DELETE FROM \"{}\" WHERE {}", table, cond);
     pqxx::nontransaction n(*connection.get());
     pqxx::result R(n.exec(sql));
+    if(!R.affected_rows()) {
+        return false;
+    }
     return true;
 }
 
@@ -147,11 +153,18 @@ bool Database::update(const std::string& table, const std::map<std::string, std:
     spdlog::info("{}", sql);
     pqxx::nontransaction n(*connection.get());
     pqxx::result R(n.exec(sql));
+    if(!R.affected_rows()) {
+        return false;
+    }
     return true;
 }
 
 
-void Database::raw_sql(const std::string& sql) {
+bool Database::raw_sql(const std::string& sql) {
     pqxx::nontransaction n(*connection.get());
     pqxx::result R(n.exec(sql));
+    if(!R.affected_rows()) {
+        return false;
+    }
+    return true;
 }    

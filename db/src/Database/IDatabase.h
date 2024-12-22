@@ -14,7 +14,7 @@ public:
     virtual bool remove(const std::string& table, const std::map<std::string, std::string>& conditions) = 0;
     virtual std::optional<std::vector<std::map<std::string, std::string>>> get(const std::string& table, const std::map<std::string, std::string>& conditions) = 0;
     virtual bool update(const std::string& table, const std::map<std::string, std::string>& values, const std::map<std::string, std::string>& conditions) = 0;
-    virtual void raw_sql(const std::string& sql) = 0;    
+    virtual bool raw_sql(const std::string& sql) = 0;    
 public:
     virtual ~IDatabase(){};
 };

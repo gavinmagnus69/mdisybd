@@ -18,6 +18,30 @@ find_package(jwt-cpp CONFIG REQUIRED)
 add_library(libs STATIC
  src/Config/Config.cpp
  src/Database/Database.cpp
+ src/Services/AchievementService.cpp
+ src/Services/DepartmentService.h
+ src/Services/EnrolleeAchievementService.cpp
+ src/Services/EnrolleePenaltyService.cpp
+ src/Services/EnrolleeService.cpp
+ src/Services/EnrolleeSubjectService.cpp
+ src/Services/PenaltyService.cpp
+ src/Services/ProgramEnrolleeService.cpp
+ src/Services/ProgramService.cpp
+ src/Services/ProgramSubjectService.cpp
+ src/Services/Service.cpp
+ src/Services/SubjectService.cpp
+ src/Services/TokenService.cpp
+ src/Services/UserService.cpp
+ src/Controllers/AuthController.cpp
+
+
+
+
+
+
+
+
+
 )
 
 target_include_directories(libs PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/src)

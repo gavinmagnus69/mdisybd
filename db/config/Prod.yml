@@ -1,0 +1,5 @@
+login: "user"
+password: "your_password"
+host: "localhost"
+port: "22813"
+database: "user"

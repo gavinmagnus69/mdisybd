@@ -12,7 +12,7 @@ class UserService : public Service {
 private:
     std::string tableName = "User";
 public:
-    void addUser(const User&);
+    bool addUser(const User&);
 };
 
 #endif
