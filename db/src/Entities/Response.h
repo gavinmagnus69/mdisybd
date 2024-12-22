@@ -14,4 +14,5 @@ struct Response {
 // Success: 0
 // Error codes:
 // User exists: 228
+// No data: 100
 #endif 

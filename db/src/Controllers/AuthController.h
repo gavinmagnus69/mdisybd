@@ -12,8 +12,8 @@ private:
 public:
     AuthController(std::shared_ptr<IDatabase>);
 public:
-    Response Register(const User&);
-    Response Login(const std::string& username, const std::string& password);
+    Response Register(const std::optional<std::map<std::string, std::string>>&);
+    Response Login(const std::optional<std::map<std::string, std::string>>&);
 };
 
 #endif
