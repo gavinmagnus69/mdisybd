@@ -10,6 +10,7 @@ class AuthController : public Controller {
 private:
     UserService userService;
 public:
+    AuthController() = default;
     AuthController(std::shared_ptr<IDatabase>);
 public:
     Response Register(const std::optional<std::map<std::string, std::string>>&);

@@ -2,8 +2,9 @@
 #include <iostream>
 
 
-Application::Application(std::shared_ptr<IDatabase> db)
+Application::Application(std::shared_ptr<IDatabase> db) 
 : db(db)
+, ui(ConsoleUI(db))
 {}
 
 void Application::Run() {

@@ -5,6 +5,8 @@
 #include <filesystem>
 
 class Builder {
+private:
+    std::shared_ptr<IDatabase> db;
 public:
     Application createApplication(std::filesystem::path&);
 };

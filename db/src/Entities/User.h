@@ -6,10 +6,10 @@
 
 
 struct User {
-    std::string username;
-    std::string email;
-    std::string password_hash;
-    u_int16_t role;
+    std::string username{""};
+    std::string email{""};
+    std::string password_hash{""};
+    u_int16_t role = 0;
 };
 
 #endif

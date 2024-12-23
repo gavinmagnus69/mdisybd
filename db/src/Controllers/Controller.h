@@ -10,6 +10,7 @@ class Controller {
 protected:
     std::shared_ptr<IDatabase> db;
 public:
+    Controller() = default;
     Controller(std::shared_ptr<IDatabase> db) : db(db) {}
 public:
     void setDatabase(std::shared_ptr<IDatabase> db) {

@@ -74,6 +74,7 @@ Database::~Database(){
 
 
 bool Database::insert(const std::string& table, const std::map<std::string, std::string>& data) {
+    spdlog::info("sql insert");
     if(data.empty()){
         spdlog::error("Database::insert empty data");
         return false;
