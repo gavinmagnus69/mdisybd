@@ -12,7 +12,13 @@ class UserService : public Service {
 private:
     std::string tableName = "User";
 public:
-    bool addUser(const User&);
+    UserService();
+    UserService(std::shared_ptr<IDatabase>);
+public:
+    bool addUser(const User&) const;
+    std::optional<User> getUser(const std::string&, const std::string&) const;
+    bool updateUser(const User&) const;
+    bool deleteUser(const std::string&) const;
 };
 
 #endif

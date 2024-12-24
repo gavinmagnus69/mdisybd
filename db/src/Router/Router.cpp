@@ -1,9 +1,11 @@
 #include "Router.h"
+#include "spdlog/spdlog.h"
 
-
-
-Router::Router(std::shared_ptr<IDatabase> db) {
-    this->auth.setDatabase(db);
+//INITIALIZE ALL CONTROLLERS TH CONSTRUCTOR 
+Router::Router(std::shared_ptr<IDatabase> db)
+: auth(AuthController(db))
+ {
+    // this->auth.setDatabase(db);
 }
 
 Response Router::Login(const User& user, const std::map<std::string, std::string>& data) {
@@ -20,5 +22,6 @@ Response Router::Register(const User& user, const std::map<std::string, std::str
     if(!access){
         return Response{"Access denied", 1488};
     }
+    // db->raw_sql("SELECT * FROM User");
     return this->auth.Register(data);
 }

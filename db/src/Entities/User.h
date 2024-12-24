@@ -10,6 +10,9 @@ struct User {
     std::string email{""};
     std::string password_hash{""};
     u_int16_t role = 0;
+    int id = 0;
 };
+
+
 
 #endif

@@ -3,9 +3,10 @@
 
 
 #include <string>
+#include "Entity.h"
 
 
-struct EnrolleePenalty {
+struct EnrolleePenalty : public id {
     u_int16_t enrollee_id;
     u_int16_t penalty_id;
 };

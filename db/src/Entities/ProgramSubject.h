@@ -3,8 +3,9 @@
 
 
 #include <string>
+#include "Entity.h"
 
-struct ProgramSubject
+struct ProgramSubject : public id
 {
     u_int16_t program_id;
     u_int16_t subject_id;

@@ -1,10 +1,18 @@
 #include "AuthController.h"
 #include "spdlog/spdlog.h"
+#include <iostream>
 
+std::ostream& operator << (std::ostream& os, const User& user) {
+    os << "User:" << user.username << ' ' << user.email << ' ' << user.password_hash << ' ' << user.role << '\n';
+    return os;
+}
+
+//INITIALIZE ALL SERVICES WITH CONSTRUCTOR
 AuthController::AuthController(std::shared_ptr<IDatabase> db)
  : Controller(db)
+ , userService(std::make_shared<UserService>(db))
     {
-        this->userService.setDatabase(db);
+        // this->userService.setDatabase(db);
     }
 
 
@@ -22,7 +30,8 @@ Response AuthController::Register(const std::optional<std::map<std::string, std:
         spdlog::info("{} {} {} {}", username, email, password, role);
         //TODO hashing
         User user{username, email, password, role};
-        bool flag = this->userService.addUser(user);
+        std::cout << user;
+        bool flag = this->userService->addUser(user);
         if(!flag) {
             spdlog::error("Cannot add user");
             return Response{"Error registering user", 228, 0};
@@ -49,7 +58,7 @@ Response AuthController::Login(const std::optional<std::map<std::string, std::st
         auto role = std::stoi(req["role"]);
         //TODO hashing
         User user{username, email, password, role};
-        bool flag = this->userService.addUser(user);
+        bool flag = this->userService->addUser(user);
         if(!flag) {
             spdlog::error("Cannot add user");
             return Response{"Error registering user", 228, 0};

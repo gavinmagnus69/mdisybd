@@ -8,7 +8,7 @@
 
 class AuthController : public Controller {
 private:
-    UserService userService;
+    std::shared_ptr<UserService> userService;
 public:
     AuthController() = default;
     AuthController(std::shared_ptr<IDatabase>);

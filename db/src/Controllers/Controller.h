@@ -15,6 +15,8 @@ public:
 public:
     void setDatabase(std::shared_ptr<IDatabase> db) {
         this->db = db;
+        // db->raw_sql("SELECT * FROM User");
+
     }
 };
 #endif

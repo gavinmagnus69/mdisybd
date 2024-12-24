@@ -2,9 +2,10 @@
 #define DEPARTMENT_H
 
 #include <string>
+#include "Entity.h"
 
 
-struct Department {
+struct Department : public id {
     std::string name_department;    
 };
 #endif

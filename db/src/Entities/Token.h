@@ -4,8 +4,9 @@
 
 #include <string>
 
+#include "Entity.h"
 
-struct Token {
+struct Token : public id {
     u_int16_t user_id;
     std::string token;
     u_int16_t exp_days;

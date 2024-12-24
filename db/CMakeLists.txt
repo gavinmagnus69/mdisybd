@@ -54,4 +54,6 @@ FetchContent_MakeAvailable(spdlog)
 
 target_link_libraries(libs PUBLIC spdlog yaml-cpp::yaml-cpp pqxx pq PostgreSQL::PostgreSQL jwt-cpp::jwt-cpp) 
 add_executable(db src/main.cpp)
-target_link_libraries(db PUBLIC libs)
+add_executable(test src/test.cpp)
+target_link_libraries(db  PUBLIC libs)
+target_link_libraries(test PUBLIC libs)

@@ -4,7 +4,8 @@
 
 ConsoleUI::ConsoleUI(std::shared_ptr<IDatabase> db)
  : router(Router(db))
-  {}
+  {
+  }
 
 void ConsoleUI::HelloMsg() {
     std::cout << "\nHello, welcome to the UNI service\n";

@@ -162,6 +162,7 @@ bool Database::update(const std::string& table, const std::map<std::string, std:
 
 
 bool Database::raw_sql(const std::string& sql) {
+    spdlog::info("raw");
     pqxx::nontransaction n(*connection.get());
     pqxx::result R(n.exec(sql));
     if(!R.affected_rows()) {

@@ -2,8 +2,8 @@
 #define ACHIEVEMENT_H
 
 #include <string>
-
-struct Achievement {
+#include "Entity.h"
+struct Achievement : public id {
     std::string name_achievement;
     u_int16_t bonus;
 };

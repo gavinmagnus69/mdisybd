@@ -2,8 +2,8 @@
 #define PENALTY_H
 
 #include <string>
-
-struct Penalty
+#include "Entity.h"
+struct Penalty : public id
 {
     std::string name_penalty;
     u_int16_t penalty_value;
