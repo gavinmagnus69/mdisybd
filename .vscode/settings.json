@@ -78,6 +78,13 @@
         "ios": "cpp",
         "locale": "cpp",
         "queue": "cpp",
-        "stack": "cpp"
+        "stack": "cpp",
+        "codecvt": "cpp",
+        "set": "cpp",
+        "numeric": "cpp",
+        "source_location": "cpp",
+        "valarray": "cpp",
+        "__hash_table": "cpp",
+        "__node_handle": "cpp"
     }
 }

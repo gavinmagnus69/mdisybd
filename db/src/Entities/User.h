@@ -3,7 +3,7 @@
 
 
 #include <string>
-
+#include <iostream>
 
 struct User {
     std::string username{""};
@@ -12,6 +12,8 @@ struct User {
     u_int16_t role = 0;
     int id = 0;
 };
+
+
 
 
 
