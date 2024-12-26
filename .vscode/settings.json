@@ -86,5 +86,17 @@
         "valarray": "cpp",
         "__hash_table": "cpp",
         "__node_handle": "cpp"
-    }
+    },
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 22813,
+            "askForPassword": true,
+            "driver": "PostgreSQL",
+            "name": "psg",
+            "database": "user",
+            "username": "user"
+        }
+    ]
 }

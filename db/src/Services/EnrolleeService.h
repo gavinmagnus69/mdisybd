@@ -3,9 +3,20 @@
 
 
 #include "Service.h"
+#include "Entities/Enrollee.h"
 
 
-class EnrolleeService : public Service {};
+class EnrolleeService : public Service {
+    std::string tableName = "enrollee";
+public:
+    EnrolleeService();
+    EnrolleeService(std::shared_ptr<IDatabase>);
+public:
+    bool addEnrollee(const Enrollee&) const;
+    std::optional<Enrollee> getEnrollee(const std::string&) const;
+    bool updateEnrollee(const Enrollee&) const;
+    bool deleteEnrollee(const std::string&) const;
+};
 
 
 

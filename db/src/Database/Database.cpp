@@ -6,11 +6,11 @@ Database::Database(std::shared_ptr<IConfig> cfg) : cfg(cfg) {
     connect();
 }
 
-//TODO: sql injection-safety
+//IF conditions empty - returns all rows
 std::optional<std::vector<std::map<std::string, std::string>>> Database::get(const std::string& table, const std::map<std::string, std::string>& conditions){
     std::string sql;
     if(conditions.empty()){
-        sql = std::format("SELECT * FROM \"{}\" LIMIT 5", table);
+        sql = std::format("SELECT * FROM \"{}\" LIMIT 1000", table);
     }
     else {
         //TODO: commas
@@ -24,7 +24,7 @@ std::optional<std::vector<std::map<std::string, std::string>>> Database::get(con
             cond += " AND ";
             --ands;
         }
-        sql = std::format("SELECT * FROM \"{}\" WHERE {} LIMIT 5", table, cond);        
+        sql = std::format("SELECT * FROM \"{}\" WHERE {} LIMIT 1000", table, cond);        
     }
     spdlog::info(sql);
     pqxx::nontransaction n(*connection.get());

@@ -3,7 +3,7 @@
 
 
 #include "Service.h"
-#include "Program.h"
+#include "Entities/Program.h"
 
 class ProgramService : public Service {
     std::string tableName = "program";

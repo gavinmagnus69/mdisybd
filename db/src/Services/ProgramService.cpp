@@ -28,7 +28,7 @@ std::optional<Program> ProgramService::getProgram(const std::string& name_pr) co
 
 //update by id
 bool ProgramService::updateProgram(const Program& pr) const {
-        return this->db->update(this->tableName, {{"name_program" , pr.name_program}, {"department_id" , std::to_string(pr.department_id)}, {"plan" , std::to_string(pr.plan)}}, {{"id", std::to_string(pr.id)}});
+    return this->db->update(this->tableName, {{"name_program" , pr.name_program}, {"department_id" , std::to_string(pr.department_id)}, {"plan" , std::to_string(pr.plan)}}, {{"id", std::to_string(pr.id)}});
 
 }
 
