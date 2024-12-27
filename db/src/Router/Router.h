@@ -15,7 +15,7 @@ private:
 public:
     Router(std::shared_ptr<IDatabase>);
 public:
-    Response Login(const User& user, const std::map<std::string, std::string>&);
+    std::tuple<Response, User> Login(const User& user, const std::map<std::string, std::string>&);
     Response Register(const User& user, const std::map<std::string, std::string>&);
     // std::string ParseRequest(const std::string& req);
 };

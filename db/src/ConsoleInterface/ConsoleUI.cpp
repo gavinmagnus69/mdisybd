@@ -1,6 +1,6 @@
 #include "ConsoleUI.h"
 #include <iostream>
-
+#include <format>
 
 ConsoleUI::ConsoleUI(std::shared_ptr<IDatabase> db)
  : router(Router(db))
@@ -40,10 +40,14 @@ int inputCode() {
 }
 
 
-void StudentPage() {
-    while(1){
-        std::cout << "Student page\n";
-    }
+void ConsoleUI::AdminPage() {
+    std::cout << std::format("Welcome to the admin system, {}", this->currentUser.username);
+    
+}
+
+
+void ConsoleUI::StudentPage() {
+    std::cout << std::format("Welcome to the system, {}", this->currentUser.username);
 }
 
 
@@ -55,15 +59,19 @@ void ConsoleUI::LoginPage() {
     std::string password{""};
     std::cout << "Enter password\n";
     std::cin >> password;
-    auto resp = this->router.Login(User{}, {{"username", username}, {"password", password}});
+    auto [resp, user] = this->router.Login(User{}, {{"username", username}, {"password", password}});
     if(resp.status) {
         std::cout << resp.msg << '\n';
         return;
     }
-    this->currentUser.username = username;
-    this->currentUser.role = resp.role;
-    StudentPage();
-
+    this->currentUser = user;
+    if(user.role == 0){
+        StudentPage();
+    }
+    if(user.role == 1){}
+    if(user.role == 2){
+        AdminPage();
+    }
 }
 
 
@@ -72,13 +80,16 @@ void ConsoleUI::RegisterPage() {
     std::cout << "Enter username\n";
     std::string username{""};
     std::cin >> username;
+    std::cout << "Enter your name\n";
+    std::string name{""};
+    std::cin >> name;
     std::cout << "Enter email\n";
     std::string email{""};
     std::cin >> email;
     std::string password{""};
     std::cout << "Enter password\n";
     std::cin >> password;
-    auto resp = this->router.Register(User{}, {{"username", username}, {"email", email}, {"password", password}, {"role", "0"}});
+    auto resp = this->router.Register(User{}, {{"username", username},{"name_enrollee", name}, {"email", email}, {"password", password}, {"role", "0"}});
     std::cout << resp.msg << '\n';
     if(resp.status){
         return;

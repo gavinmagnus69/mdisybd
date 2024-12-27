@@ -11,9 +11,9 @@ struct Response {
     u_int16_t role = 0;    
 };
 
-//unknown error: 1337
 // Success: 0
 // Error codes:
 // User exists: 228
 // No data: 100
+// unknown error: 1337
 #endif 

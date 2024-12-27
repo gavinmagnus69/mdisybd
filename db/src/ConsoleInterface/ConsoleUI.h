@@ -8,6 +8,7 @@
 class ConsoleUI {
 private:
     User currentUser;
+    Enrollee currentEnrollee;
     Router router;
 public:
     ConsoleUI(std::shared_ptr<IDatabase>);
@@ -16,6 +17,8 @@ private:
     void AuthPage();
     void RegisterPage();
     void LoginPage();
+    void StudentPage();
+    void AdminPage();
 public:
     void Run();
 };
