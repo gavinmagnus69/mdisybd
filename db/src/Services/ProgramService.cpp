@@ -17,8 +17,8 @@ bool ProgramService::addProgram(const Program& pr) const {
 }
 
 //get by name_program
-std::optional<Program> ProgramService::getProgram(const std::string& name_pr) const {
-    auto resp = this->db->get(this->tableName, {{"name_program", name_pr}});
+std::optional<Program> ProgramService::getProgram(const std::map<std::string, std::string>& cond) const {
+    auto resp = this->db->get(this->tableName, cond);
     if(!resp.has_value()){
         return std::nullopt;
     }
@@ -33,6 +33,20 @@ bool ProgramService::updateProgram(const Program& pr) const {
 }
 
 //delete by name_program
-bool ProgramService::deleteProgram(const std::string& name) const {
-    return this->db->remove(this->tableName, {{"name_program", name}});
+bool ProgramService::deleteProgram(const std::map<std::string, std::string>& cond) const {
+    return this->db->remove(this->tableName, cond);
+}
+
+
+std::optional<std::vector<Program>> ProgramService::getAll() {
+    auto resp = this->db->get(this->tableName, {});
+    if(!resp.has_value()){
+        return std::nullopt;
+    }
+    auto firstSubMap = resp.value();
+    std::vector<Program> subs;
+    for(auto m : firstSubMap) {
+        subs.push_back(Program{std::stoi(m["id"]), m["name_program"], (u_int16_t)std::stoi(m["department_id"]), (u_int16_t)std::stoi(m["plan"])});
+    }
+    return subs;    
 }

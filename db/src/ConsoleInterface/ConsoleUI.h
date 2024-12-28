@@ -10,6 +10,7 @@ private:
     User currentUser;
     Enrollee currentEnrollee;
     Router router;
+    std::shared_ptr<IDatabase> db;
 public:
     ConsoleUI(std::shared_ptr<IDatabase>);
 private:

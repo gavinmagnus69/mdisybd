@@ -35,3 +35,17 @@ bool EnrolleeService::updateEnrollee(const Enrollee& obj) const {
 bool EnrolleeService::deleteEnrollee(const std::string& name) const {
     return this->db->remove(this->tableName, {{"name_enrollee", name}});
 }
+
+
+std::optional<std::vector<Enrollee>> EnrolleeService::getAll() {
+    auto resp = this->db->get(this->tableName, {});
+    if(!resp.has_value()){
+        return std::nullopt;
+    }
+    auto firstSubMap = resp.value();
+    std::vector<Enrollee> subs;
+    for(auto m : firstSubMap) {
+        subs.push_back(Enrollee{std::stoi(m["id"]), m["name_enrollee"], (u_int16_t)std::stoi(m["user_id"])});
+    }
+    return subs;    
+}

@@ -20,6 +20,7 @@ public:
     std::optional<User> getUser(const std::string&, const std::string&) const;
     bool updateUser(const User&) const;
     bool deleteUser(const std::string&) const;
+    std::optional<std::vector<User>> getAll();
 };
 
 #endif

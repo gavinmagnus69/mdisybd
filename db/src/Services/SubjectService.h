@@ -13,9 +13,10 @@ public:
     SubjectService(std::shared_ptr<IDatabase>);
 public:
     bool addSubject(const Subject&) const;
-    std::optional<Subject> getSubject(const std::string&) const;
+    std::optional<Subject> getSubject(const std::map<std::string, std::string>& cond) const;
     bool updateSubject(const Subject&) const;
-    bool deleteSubject(const std::string&) const;
+    bool deleteSubject(const std::map<std::string, std::string>& cond) const;
+    std::optional<std::vector<Subject>> getAll();
 };
 
 

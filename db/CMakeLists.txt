@@ -21,7 +21,7 @@ add_library(libs STATIC
  src/Application/Application.cpp
  src/Builder/Builder.cpp
  src/Services/AchievementService.cpp
- src/Services/DepartmentService.h
+ src/Services/DepartmentService.cpp
  src/Services/EnrolleeAchievementService.cpp
  src/Services/EnrolleePenaltyService.cpp
  src/Services/EnrolleeService.cpp

@@ -17,8 +17,8 @@ bool SubjectService::addSubject(const Subject& sub) const {
 }
 
 
-std::optional<Subject> SubjectService::getSubject(const std::string& name_sub) const {
-    auto resp = this->db->get(this->tableName, {{"name_subject", name_sub}});
+std::optional<Subject> SubjectService::getSubject(const std::map<std::string, std::string>& cond) const {
+    auto resp = this->db->get(this->tableName, cond);
     if(!resp.has_value()){
         return std::nullopt;
     }
@@ -32,7 +32,21 @@ bool SubjectService::updateSubject(const Subject& sub) const {
 }
 
 
-bool SubjectService::deleteSubject(const std::string& name_sub) const {
-    return this->db->remove(this->tableName, {{"name_subject", name_sub}});
+bool SubjectService::deleteSubject(const std::map<std::string, std::string>& cond) const {
+    return this->db->remove(this->tableName, cond);
 
+}
+
+
+std::optional<std::vector<Subject>> SubjectService::getAll() {
+    auto resp = this->db->get(this->tableName, {});
+    if(!resp.has_value()){
+        return std::nullopt;
+    }
+    auto firstSubMap = resp.value();
+    std::vector<Subject> subs;
+    for(auto m : firstSubMap) {
+        subs.push_back(Subject{std::stoi(m["id"]), m["name_subject"]});
+    }
+    return subs;    
 }

@@ -12,9 +12,10 @@ public:
     ProgramService(std::shared_ptr<IDatabase>);
 public:
     bool addProgram(const Program&) const;
-    std::optional<Program> getProgram(const std::string&) const;
+    std::optional<Program> getProgram(const std::map<std::string, std::string>&) const;
     bool updateProgram(const Program&) const;
-    bool deleteProgram(const std::string&) const;
+    bool deleteProgram(const std::map<std::string, std::string>&) const;
+    std::optional<std::vector<Program>> getAll();
 };
 
 

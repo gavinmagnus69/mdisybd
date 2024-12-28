@@ -45,6 +45,20 @@ bool UserService::deleteUser(const std::string& name) const {
 }
 
 
+std::optional<std::vector<User>> UserService::getAll() {
+    auto resp = this->db->get(this->tableName, {});
+    if(!resp.has_value()){
+        return std::nullopt;
+    }
+    auto usersMap = resp.value();
+    std::vector<User> users;
+    for(auto& m : usersMap){
+        users.push_back(User{m["username"], m["email"], m["password_hash"], (uint16_t)(std::stoi(m["role"])), std::stoi(m["id"])});
+    }
+    return users;
+}
+
+
 
 
 
